@@ -1,11 +1,12 @@
 package aridi.myCollection;
 
 import java.util.Arrays;
+import java.util.RandomAccess;
 
-public class MyArrayList<E> implements MyList<E> {
-    private Object[] array;
-    private int counter = 0;
-    private int capacity = 10;
+public class MyArrayList<E> implements MyList<E>, RandomAccess {
+    private Object[] array;     // массив используемый за основу
+    private int size = 0;       // текущий размер заполнености массива элементами
+    private int capacity = 10;  // текущая вместимость массива
 
     public MyArrayList() {
         array = new Object[capacity];
@@ -13,21 +14,23 @@ public class MyArrayList<E> implements MyList<E> {
 
     @Override
     public void add(E element) {
-        if (counter == array.length) {
+        if (size == array.length) {
             grow();
         }
-        array[counter++] = element;
+        array[size++] = element;
     }
 
     @Override
     public void addAll(MyCollection<E> args) {
         Object[] array1 = args.toArray();
-        while (capacity - counter - array1.length > 0) {
+
+        while (capacity - size - array1.length > 0) {
             grow();
         }
-        for (int i = 0; i < args.size(); i++) {
-            array[counter + i] = array1[i];
+        for (int i = 0; i < array1.length; i++) {
+            array[size + i] = array1[i];
         }
+        size = size + array1.length;
     }
 
     @Override
@@ -64,16 +67,18 @@ public class MyArrayList<E> implements MyList<E> {
     public void bubbleSort() {
 //        if (this instanceof Comparable<?>) {
         boolean notSorted = true;
+
         while (notSorted) {
+
             notSorted = false;
-            for (int i = 0; i < array.length - 1; i++) {
-                if (array[i + 1] == null) {
-                    break;
-                }
+
+            for (int i = 0; i < size; i++) {
                 if (((Comparable) array[i]).compareTo(array[i + 1]) > 0) {
+
                     Object a = array[i];
                     array[i] = array[i + 1];
                     array[i + 1] = a;
+
                     notSorted = true;
                 }
             }
