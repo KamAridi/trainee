@@ -3,7 +3,7 @@ package aridi.myCollection;
 import java.util.Arrays;
 import java.util.RandomAccess;
 
-public class MyArrayList<E> implements MyList<E>, RandomAccess {
+public class MyArrayList<E> implements MyList<E>, RandomAccess       {
     private Object[] array;     // массив используемый за основу
     private int size = 0;       // текущий размер заполнености массива элементами
     private int capacity = 10;  // текущая вместимость массива

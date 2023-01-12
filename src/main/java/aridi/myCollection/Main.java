@@ -18,5 +18,10 @@ public class Main {
         }
         myArrayList.bubbleSort();
         System.out.println("\n" + myArrayList);
+        MyLinkedList<Integer> myLinkedList = new MyLinkedList<>();
+        for (int i = 0; i < 100; i++) {
+            myLinkedList.add(i);
+        }
+        System.out.println(myLinkedList.get(1));
     }
 }
